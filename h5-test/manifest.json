@@ -1,0 +1,13 @@
+{
+    "version": "0.2",
+    "requires" : ["pandas"],
+    "dumper" : {
+        "data_url" : ["https://github.com/dylanpilz/biothings-test/blob/main/data_folder/metadata.tsv",
+                      "https://github.com/dylanpilz/biothings-test/blob/main/data_folder/mutations.tsv"],
+        "uncompress" : false
+    },
+    "uploader" : {
+        "parser" : "parser:load_annotations",
+        "on_duplicates" : "error"
+    }
+}
