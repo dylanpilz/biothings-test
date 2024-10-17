@@ -8,7 +8,7 @@ logging = config.logger
 def load_annotations(data_folder):
     infile = os.path.join(data_folder,"mutations.tsv")
     assert os.path.exists(infile)
-    dat = pandas.read_csv(infile,sep="\t",squeeze=True,quoting=csv.QUOTE_NONE).to_dict(orient='records')
+    dat = pandas.read_csv(infile,sep="\t", quoting=csv.QUOTE_NONE).to_dict(orient='records')
     results = {}
     for rec in dat:
 
