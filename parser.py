@@ -8,9 +8,11 @@ logging = config.logger
 def load_annotations(data_folder):
     infile = os.path.join(data_folder,"mutations.tsv")
     assert os.path.exists(infile)
-    dat = pandas.read_csv(infile,sep="\t", quoting=csv.QUOTE_NONE).to_dict(orient='records')
+    dat = pandas.read_csv(infile,sep="\t",quoting=csv.QUOTE_NONE).to_dict(orient='records')
     results = {}
     for rec in dat:
+
+        _id = re.match(".* \((.*?)\)",rec["sra_accession"]).groups()[0]
         # we'll remove space in keys to make queries easier. Also, lowercase is preferred
         # for a BioThings API. We'll an helper function from BioThings SDK
         process_key = lambda k: k.replace(" ","_").lower()
@@ -18,5 +20,5 @@ def load_annotations(data_folder):
         results.setdefault(_id,[]).append(rec)
         
     for _id,docs in results.items():
-        doc = {"_id": _id, "annotations" : docs}
+        doc = {"_id": _id, "mutations" : docs}
         yield doc
