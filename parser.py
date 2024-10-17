@@ -11,11 +11,6 @@ def load_annotations(data_folder):
     dat = pandas.read_csv(infile,sep="\t", quoting=csv.QUOTE_NONE).to_dict(orient='records')
     results = {}
     for rec in dat:
-
-        if not rec["Gene"] or pandas.isna(rec["Gene"]):
-            logging.warning("No gene information for annotation ID '%s'", rec["Annotation ID"])
-            continue
-        _id = re.match(".* \((.*?)\)",rec["Gene"]).groups()[0]
         # we'll remove space in keys to make queries easier. Also, lowercase is preferred
         # for a BioThings API. We'll an helper function from BioThings SDK
         process_key = lambda k: k.replace(" ","_").lower()
