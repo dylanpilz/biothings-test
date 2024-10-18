@@ -12,8 +12,7 @@ def load_annotations(data_folder):
     results = {}
     for rec in dat:
 
-        _id = re.match(".* \((.*?)\)",rec["sra_accession"]).groups()[0]
-        _id += f"_{rec['nt_site']}"
+        _id = f'{rec["sra_accession"].groups()[0]}_{rec['nt_site'].groups()[0]}'
         # we'll remove space in keys to make queries easier. Also, lowercase is preferred
         # for a BioThings API. We'll an helper function from BioThings SDK
         process_key = lambda k: k.replace(" ","_").lower()
